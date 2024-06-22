@@ -1,0 +1,8 @@
+.bg {
+  background-image: url("../../../assets/home/chef-service.jpg");
+  padding: 120px;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
