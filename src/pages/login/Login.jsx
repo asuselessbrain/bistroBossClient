@@ -1,4 +1,59 @@
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import {
+  loadCaptchaEnginge,
+  LoadCanvasTemplate,
+  LoadCanvasTemplateNoReload,
+  validateCaptcha,
+} from "react-simple-captcha";
+
 const Login = () => {
+  //   const [user_captcha_value, setCaptchaValue] = useState("");
+  const [disabled, setDisabled] = useState(true);
+
+  //   const handleChange = (e) => {
+  //     setCaptchaValue(e.target.value);
+
+  //     if (validateCaptcha(user_captcha_value)==true) {
+  //         alert('Captcha Matched');
+  //     }
+
+  //     else {
+  //         alert('Captcha Does Not Match');
+  //     }
+  //   };
+
+  //   console.log(user_captcha_value)
+
+  const handleCapcha = (e) => {
+    e.preventDefault();
+
+    const user_captcha_value = document.getElementById("chapcha").value;
+
+    if (validateCaptcha(user_captcha_value)==true) {
+        setDisabled(false)
+    }
+
+    else {
+        setDisabled(true)
+    }
+
+    
+  };
+
+  useEffect(() => {
+    loadCaptchaEnginge(6);
+  }, []);
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => console.log(data);
+
   return (
     <section className="h-screen max-w-[1440px] mx-auto">
       <div className="container h-full px-6 py-24">
@@ -14,37 +69,49 @@ const Login = () => {
 
           {/* Right column container with form */}
           <div className="md:w-8/12 lg:ms-6 lg:w-5/12">
-            <form>
+            <form onSubmit={handleSubmit(onSubmit)}>
               {/* Email input */}
               <div className="relative mb-6" data-twe-input-wrapper-init>
                 <input
-                  type="text"
-                  className="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[2.15] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[twe-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-white dark:placeholder:text-neutral-300 dark:autofill:shadow-autofill dark:peer-focus:text-primary [&:not([data-twe-input-placeholder-active])]:placeholder:opacity-0"
-                  id="exampleFormControlInput3"
+                  type="email"
+                  className="input w-full input-bordered mt-3"
                   placeholder="Email address"
+                  {...register("email", { required: true })}
                 />
-                <label
-                  htmlFor="exampleFormControlInput3"
-                  className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[2.15] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[1.15rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[twe-input-state-active]:-translate-y-[1.15rem] peer-data-[twe-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-400 dark:peer-focus:text-primary"
-                >
-                  Email address
-                </label>
+
+                {errors.email && <span>This field is required</span>}
               </div>
 
               {/* Password input */}
               <div className="relative mb-6" data-twe-input-wrapper-init>
                 <input
                   type="password"
-                  className="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[2.15] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[twe-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-white dark:placeholder:text-neutral-300 dark:autofill:shadow-autofill dark:peer-focus:text-primary [&:not([data-twe-input-placeholder-active])]:placeholder:opacity-0"
-                  id="exampleFormControlInput33"
+                  className="input w-full input-bordered mt-3"
                   placeholder="Password"
+                  {...register("password", { required: true })}
                 />
-                <label
-                  htmlFor="exampleFormControlInput33"
-                  className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[2.15] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[1.15rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[twe-input-state-active]:-translate-y-[1.15rem] peer-data-[twe-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-400 dark:peer-focus:text-primary"
+
+                {errors.password && <span>This field is required</span>}
+              </div>
+
+              {/* capcha */}
+
+              <div>
+                <LoadCanvasTemplateNoReload />
+                <input
+                  type="text"
+                  className="input w-full input-bordered mt-3"
+                  name="chapcha"
+                  id="chapcha"
+                  placeholder="Type the capcha"
+                />
+
+                <button
+                  onClick={handleCapcha}
+                  className="btn btn-outline bg-black text-white btn-sm w-full uppercase my-4"
                 >
-                  Password
-                </label>
+                  validate capcha
+                </button>
               </div>
 
               {/* Remember me checkbox */}
@@ -74,14 +141,13 @@ const Login = () => {
               </div>
 
               {/* Submit button */}
-              <button
+
+              <input
+                disabled={disabled}
                 type="submit"
-                className="inline-block w-full rounded bg-primary px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
-                data-twe-ripple-init
-                data-twe-ripple-color="light"
-              >
-                Sign in
-              </button>
+                className="btn btn-primary w-full bg-blue-600 border-0"
+                value="Sign in"
+              />
 
               {/* Divider */}
               <div className="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300 dark:before:border-neutral-500 dark:after:border-neutral-500">
@@ -93,7 +159,7 @@ const Login = () => {
               {/* Social login buttons */}
               <a
                 className="mb-3 flex w-full items-center justify-center rounded bg-primary px-7 pb-2.5 pt-3 text-center text-sm font-medium uppercase leading-normal text-white shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
-                style={{ backgroundColor: '#3b5998' }}
+                style={{ backgroundColor: "#3b5998" }}
                 href="#!"
                 role="button"
                 data-twe-ripple-init
@@ -109,7 +175,7 @@ const Login = () => {
               </a>
               <a
                 className="mb-3 flex w-full items-center justify-center rounded bg-info px-7 pb-2.5 pt-3 text-center text-sm font-medium uppercase leading-normal text-white shadow-info-3 transition duration-150 ease-in-out hover:bg-info-accent-300 hover:shadow-info-2 focus:bg-info-accent-300 focus:shadow-info-2 focus:outline-none focus:ring-0 active:bg-info-600 active:shadow-info-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
-                style={{ backgroundColor: '#55acee' }}
+                style={{ backgroundColor: "#55acee" }}
                 href="#!"
                 role="button"
                 data-twe-ripple-init
