@@ -1,7 +1,7 @@
 const Banner = ({img, title, subTitle}) => {
   return (
     <div
-      className="hero h-[700px]"
+      className="hero h-[800px]"
       style={{
         backgroundAttachment: "fixed",
         backgroundPosition: "center",

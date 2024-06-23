@@ -11,7 +11,7 @@ const ChefRecommends = () => {
   return (
     <div>
       <TitelSubtitle title="chef Recommends" subTitle="Should Try" />
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mb-20">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-20">
         {ChefRecommend.map((item) => (
           <MenuCard2 key={item._id} item={item} />
         ))}
