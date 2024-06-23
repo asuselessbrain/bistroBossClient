@@ -53,7 +53,7 @@ const NavBar = () => {
                         }>OUR SHOP</NavLink></li>
                     </ul>
                 </div>
-                <a className="btn bg-red-500 hover:bg-red-400 border-0 text-white">Sign Up</a>
+                <Link to="/login" className="btn bg-red-500 hover:bg-red-400 border-0 text-white">Sign Up</Link>
             </div>
         </div>
     );
