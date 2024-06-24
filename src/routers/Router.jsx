@@ -5,36 +5,36 @@ import OurMenu from "../pages/ourMenu/OurMenu";
 import OurShop from "../pages/ourShop/OurShop";
 import Login from "../pages/login/Login";
 import SignUp from "../pages/signUp/SignUp";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <MainLayout />,
+  {
+    path: "/",
+    element: <MainLayout />,
 
-      children : [
-        {
-            path: '/',
-            element: <Home />
-        },
-        {
-          path: "/our-menu",
-          element: <OurMenu />
-        },
-        {
-          path: "/our-shop",
-          element: <OurShop />
-        }
-      ]
-    },
-    {
-      path: '/login',
-      element: <Login />
-    },
-    {
-      path:'/sign-up',
-      element:<SignUp />
-    }
-    
-  ]);
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/our-menu",
+        element: <OurMenu />,
+      },
+      {
+        path: "/our-shop",
+        element: <OurShop />,
+      },
+    ],
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/sign-up",
+    element: <SignUp />,
+  },
+]);
 
-  export default router;
+export default router;

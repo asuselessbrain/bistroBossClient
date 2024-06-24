@@ -2,17 +2,18 @@ import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../../authentication/AuthProiver";
 import { toast } from "react-toastify";
+import cart from "../../../assets/icon/151-1511569_cart-notifications-free-shopping-cart-favicon-hd-png-removebg-preview.png";
 
 const NavBar = () => {
   const { user, logOut } = useContext(AuthContext);
 
-  const handleLogOut =() => {
+  const handleLogOut = () => {
     logOut()
-    .then(()=> {
+      .then(() => {
         toast.success("LogOut successfully!");
-    })
-    .catch(error => console.log(error))
-  }
+      })
+      .catch((error) => console.log(error));
+  };
 
   return (
     <div className="navbar bg-[#15151599] fixed z-40 max-w-[1440px] mx-auto p-8">
@@ -148,6 +149,12 @@ const NavBar = () => {
               >
                 OUR SHOP
               </NavLink>
+            </li>
+            <li>
+              <button>
+                <img width={'50px'} src={cart} alt="" />
+                <div className="badge badge-secondary">+99</div>
+              </button>
             </li>
           </ul>
         </div>

@@ -1,13 +1,12 @@
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
-import Map from "../../shared/components/mapCondition/Map";
 import OurMenuMap from "../../shared/components/mapCondition/OurMenuMap";
 
 const OurShopMenu = () => {
   return (
     <div className="my-20">
       <Tabs>
-        <TabList  style={{'font-size': '20px', 'font-weight': '600'}}>
+        <TabList  style={{'fontSize': '20px', 'fontWeight': '600'}}>
           <Tab>SALAD</Tab>
           <Tab>PIZZA</Tab>
           <Tab>SOUPS</Tab>

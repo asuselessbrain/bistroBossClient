@@ -23,6 +23,7 @@ const AuthProiver = ({ children }) => {
   //   login user
 
   const signIn = (email, password) => {
+    setLoader(true)
     return signInWithEmailAndPassword(auth, email, password);
   };
 
@@ -64,6 +65,7 @@ const AuthProiver = ({ children }) => {
     updateUserProfile,
     logOut,
     signIn,
+    loader,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

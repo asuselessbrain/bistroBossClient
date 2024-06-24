@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.45.1",
+    "axios": "^1.7.2",
     "firebase": "^10.12.2",
     "keen-slider": "^6.8.6",
     "localforage": "^1.10.0",
