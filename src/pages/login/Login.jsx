@@ -1,17 +1,25 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   loadCaptchaEnginge,
   LoadCanvasTemplateNoReload,
   validateCaptcha,
 } from "react-simple-captcha";
 import { toast } from "react-toastify";
-import img from "../../assets/others/authentication2.png"
-import '../signUp/style.css'
+import img from "../../assets/others/authentication2.png";
+import "../signUp/style.css";
+import { AuthContext } from "../../authentication/AuthProiver";
 
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
+
+  const { signIn } = useContext(AuthContext);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  let from = location.state?.from?.pathname || "/";
 
   const handleCapcha = (e) => {
     e.preventDefault();
@@ -40,7 +48,12 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    signIn(data.email, data.password).then(() => {
+      toast.success("Login successful!");
+      navigate(from, { replace: true });
+    });
+  };
 
   return (
     <section className="loginBg">
@@ -48,11 +61,7 @@ const Login = () => {
         <div className="flex h-full p-10 rounded-md flex-wrap items-center justify-center lg:justify-between shadow-[0px_22px_70px_4px_rgba(0,0,0,0.56)]">
           {/* Left column container with background */}
           <div className="mb-12 md:mb-0 md:w-8/12 lg:w-6/12">
-            <img
-              src={img}
-              className="w-full"
-              alt="Phone"
-            />
+            <img src={img} className="w-full" alt="Phone" />
           </div>
 
           {/* Right column container with form */}
@@ -92,7 +101,8 @@ const Login = () => {
                   className="input w-full input-bordered mt-3"
                   name="chapcha"
                   id="chapcha"
-                  placeholder="Type the capcha" required
+                  placeholder="Type the capcha"
+                  required
                 />
               </div>
 
@@ -134,7 +144,12 @@ const Login = () => {
 
             {/* Divider */}
 
-            <p className="text-center mt-6 text-[#D1A054] text-xl">New here? <Link to="/sign-up" className="font-bold">Create a New Account</Link></p>
+            <p className="text-center mt-6 text-[#D1A054] text-xl">
+              New here?{" "}
+              <Link to="/sign-up" className="font-bold">
+                Create a New Account
+              </Link>
+            </p>
             <div className="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300 dark:before:border-neutral-500 dark:after:border-neutral-500">
               <p className="mx-4 mb-0 text-center font-semibold dark:text-neutral-200">
                 OR
@@ -174,7 +189,6 @@ const Login = () => {
               </span>
               Continue with X
             </a>
-
           </div>
         </div>
       </div>

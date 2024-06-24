@@ -1,9 +1,16 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
-import img from "../../assets/others/authentication2.png"
-import './style.css'
+import { Link, useNavigate } from "react-router-dom";
+import img from "../../assets/others/authentication2.png";
+import "./style.css";
+import { useContext } from "react";
+import { AuthContext } from "../../authentication/AuthProiver";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
+  const { creatUser, logOut, updateUserProfile } = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -11,18 +18,31 @@ const SignUp = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    creatUser(data.email, data.password)
+      .then((userCredential) => {
+        updateUserProfile(data.name, data.photoUrl);
+
+        logOut();
+
+        toast.success("Registration successful!");
+
+        navigate("/login");
+      })
+
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+      });
+  };
   return (
     <section className="loginBg">
       <div className="container h-full px-6 py-24 mx-auto">
         <div className="flex h-full p-10 rounded-md flex-wrap flex-row-reverse items-center justify-center lg:justify-between shadow-[0px_22px_70px_4px_rgba(0,0,0,0.56)]">
           {/* Left column container with background */}
           <div className="mb-12 md:mb-0 md:w-8/12 lg:w-6/12">
-            <img
-              src={img}
-              className="w-full"
-              alt="Phone"
-            />
+            <img src={img} className="w-full" alt="Phone" />
           </div>
 
           {/* Right column container with form */}
@@ -112,7 +132,10 @@ const SignUp = () => {
             {/* Divider */}
 
             <p className="text-center mt-6 text-[#D1A054] text-xl">
-              Already registered?<Link to='/login' className="font-bold"> Go to log in</Link>
+              Already registered?
+              <Link to="/login" className="font-bold">
+                Go to log in
+              </Link>
             </p>
             <div className="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300 dark:before:border-neutral-500 dark:after:border-neutral-500">
               <p className="mx-4 mb-0 text-center font-semibold dark:text-neutral-200">
