@@ -9,8 +9,9 @@ import { FaShopify } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 
 const Dashbord = () => {
+
   return (
-    <div className="flex gap-[100px]">
+    <div className="flex">
       <div className="bg-[#D1A054] w-[280px] min-h-screen pl-[35px] pt-[50px] flex flex-col gap-20">
         <div>
           <h2 className="text-2xl font-extrabold">Bistro Boss</h2>
@@ -137,7 +138,7 @@ const Dashbord = () => {
           </ul>
         </div>
       </div>
-      <div className="w-full">
+      <div className="w-full bg-[#F6F6F6]">
         <Outlet />
       </div>
     </div>
