@@ -27,7 +27,6 @@ const MenuCard2 = ({ item }) => {
         price,
       };
       axiosSecure.post("/carts", cartItem).then((res) => {
-        console.log(res.data)
         refetch()
         if(res.data.insertedId){
           toast.success("Add to cart successfully!");
