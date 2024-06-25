@@ -2,10 +2,14 @@ import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../../authentication/AuthProiver";
 import { toast } from "react-toastify";
-import cart from "../../../assets/icon/151-1511569_cart-notifications-free-shopping-cart-favicon-hd-png-removebg-preview.png";
+import cartImg from "../../../assets/icon/151-1511569_cart-notifications-free-shopping-cart-favicon-hd-png-removebg-preview.png";
+import useCart from "../../../hooks/useCart";
+import { BsCart4 } from "react-icons/bs";
 
 const NavBar = () => {
   const { user, logOut } = useContext(AuthContext);
+
+  const [cart] = useCart()
 
   const handleLogOut = () => {
     logOut()
@@ -37,7 +41,7 @@ const NavBar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-black rounded-box w-52"
           >
             <li>
               <NavLink
@@ -51,15 +55,17 @@ const NavBar = () => {
             </li>
             <li>
               <NavLink
+                to="/asdg"
                 className={({ isActive }) =>
                   isActive ? "text-[#EEFF25]" : "text-white"
                 }
               >
-                CONTACT us
+                CONTACT US
               </NavLink>
             </li>
             <li>
               <NavLink
+                to="/sdg"
                 className={({ isActive }) =>
                   isActive ? "text-[#EEFF25]" : "text-white"
                 }
@@ -74,7 +80,7 @@ const NavBar = () => {
                   isActive ? "text-[#EEFF25]" : "text-white"
                 }
               >
-                Our Menu
+                OUR MENU
               </NavLink>
             </li>
             <li>
@@ -84,7 +90,14 @@ const NavBar = () => {
                   isActive ? "text-[#EEFF25]" : "text-white"
                 }
               >
-                Our Shop
+                OUR SHOP
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/dashbord">
+                {/* <img width={'50px'} src={cartImg} alt="" />///////// */}
+                <BsCart4 className="text-3xl text-green-500" />
+                <div className="badge badge-secondary absolute left-8 top-0">{cart.length}</div>
               </NavLink>
             </li>
           </ul>
@@ -151,10 +164,11 @@ const NavBar = () => {
               </NavLink>
             </li>
             <li>
-              <button>
-                <img width={'50px'} src={cart} alt="" />
-                <div className="badge badge-secondary">+99</div>
-              </button>
+              <NavLink to="/dashbord/cart">
+                {/* <img width={'50px'} src={cartImg} alt="" />///////// */}
+                <BsCart4 className="text-3xl text-green-500" />
+                <div className="badge badge-secondary absolute left-8 top-0">{cart.length}</div>
+              </NavLink>
             </li>
           </ul>
         </div>
