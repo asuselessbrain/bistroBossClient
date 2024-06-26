@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 import useAxios from "../../hooks/useAxios";
 import TitelSubtitle from "../shared/components/titleSubtitle/TitelSubtitle";
 import { useQuery } from "@tanstack/react-query";
@@ -5,13 +6,38 @@ import { useQuery } from "@tanstack/react-query";
 const AllUses = () => {
   const axiosSecure = useAxios();
 
-  const { data: users = [] } = useQuery({
+  const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: () =>
       axiosSecure.get("/users").then((res) => {
         return res.data;
       }),
   });
+
+  const handleDelete = (user) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/users/${user._id}`).then((res) => {
+          if (res.data.deletedCount > 0) {
+            refetch();
+            Swal.fire({
+              title: "Deleted!",
+              text: `${user.name} is deleted`,
+              icon: "success",
+            });
+          }
+        });
+      }
+    });
+  };
   return (
     <div>
       <TitelSubtitle subTitle="-How many??" title="MANAGE ALL USERS" />
@@ -56,7 +82,10 @@ const AllUses = () => {
                     </button>
                   </td>
                   <th>
-                    <button className="btn btn-ghost bg-[#B91C1C] hover:bg-red-500">
+                    <button
+                      onClick={() => handleDelete(user)}
+                      className="btn btn-ghost bg-[#B91C1C] hover:bg-red-500"
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
