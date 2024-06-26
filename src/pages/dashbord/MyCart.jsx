@@ -41,11 +41,11 @@ const MyCart = () => {
   };
 
   return (
-    <div>
+    <div className="p-2">
       <TitelSubtitle subTitle="My Cart" title="WANNA ADD MORE?" />
 
-      <div className="max-w-[992px] mx-auto mt-10">
-        <div className="flex justify-between">
+      <div className="max-w-[992px] mx-auto mt-10 bg-white p-10">
+        <div className="flex flex-col md:flex-row gap-6 md:gap-0 justify-between">
           <h2 className="text-[32px] font-bold uppercase">
             Total orders: {cart.length}
           </h2>

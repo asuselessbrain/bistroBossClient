@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import img from "../../assets/others/authentication2.png";
 import "../signUp/style.css";
 import { AuthContext } from "../../authentication/AuthProiver";
+import SocialLogin from "../shared/components/socialLogin/SocialLogin";
 
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
@@ -157,38 +158,7 @@ const Login = () => {
             </div>
 
             {/* Social login buttons */}
-            <a
-              className="mb-3 flex w-full items-center justify-center rounded bg-primary px-7 pb-2.5 pt-3 text-center text-sm font-medium uppercase leading-normal text-white shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
-              style={{ backgroundColor: "#3b5998" }}
-              href="#!"
-              role="button"
-              data-twe-ripple-init
-              data-twe-ripple-color="light"
-            >
-              {/* Facebook */}
-              <span className="me-2 fill-white [&>svg]:mx-auto [&>svg]:h-3.5 [&>svg]:w-3.5">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                  <path d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z" />
-                </svg>
-              </span>
-              Continue with Facebook
-            </a>
-            <a
-              className="mb-3 flex w-full items-center justify-center rounded bg-info px-7 pb-2.5 pt-3 text-center text-sm font-medium uppercase leading-normal text-white shadow-info-3 transition duration-150 ease-in-out hover:bg-info-accent-300 hover:shadow-info-2 focus:bg-info-accent-300 focus:shadow-info-2 focus:outline-none focus:ring-0 active:bg-info-600 active:shadow-info-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
-              style={{ backgroundColor: "#55acee" }}
-              href="#!"
-              role="button"
-              data-twe-ripple-init
-              data-twe-ripple-color="light"
-            >
-              {/* X */}
-              <span className="me-2 fill-white [&>svg]:h-3.5 [&>svg]:w-3.5">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                  <path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" />
-                </svg>
-              </span>
-              Continue with X
-            </a>
+            <SocialLogin />
           </div>
         </div>
       </div>

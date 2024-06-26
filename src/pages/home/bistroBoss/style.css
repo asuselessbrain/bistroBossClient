@@ -6,3 +6,41 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+/* For devices with a width of 1200px and above */
+@media (min-width: 1200px) {
+  .bg {
+    padding: 120px;
+  }
+}
+
+/* For devices with a width between 992px and 1199px */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .bg {
+    padding: 100px;
+  }
+}
+
+/* For devices with a width between 768px and 991px */
+@media (min-width: 768px) and (max-width: 991px) {
+  .bg {
+    padding: 80px;
+  }
+}
+
+/* For devices with a width between 576px and 767px */
+@media (min-width: 576px) and (max-width: 767px) {
+  .bg {
+    padding: 60px;
+  }
+}
+
+/* For devices with a width less than 576px */
+@media (max-width: 575px) {
+  .bg {
+    padding: 40px;
+  }
+}
+
+
+

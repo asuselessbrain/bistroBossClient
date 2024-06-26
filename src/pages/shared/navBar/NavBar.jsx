@@ -65,7 +65,7 @@ const NavBar = () => {
             </li>
             <li>
               <NavLink
-                to="/sdg"
+                to="/dashbord"
                 className={({ isActive }) =>
                   isActive ? "text-[#EEFF25]" : "text-white"
                 }
@@ -135,7 +135,7 @@ const NavBar = () => {
             </li>
             <li>
               <NavLink
-                to="/sdg"
+                to="/dashbord"
                 className={({ isActive }) =>
                   isActive ? "text-[#EEFF25]" : "text-white"
                 }
