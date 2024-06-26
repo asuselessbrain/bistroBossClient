@@ -5,9 +5,11 @@ import "./style.css";
 import { useContext } from "react";
 import { AuthContext } from "../../authentication/AuthProiver";
 import { toast } from "react-toastify";
+import useAxios from "../../hooks/useAxios";
 
 const SignUp = () => {
   const { creatUser, logOut, updateUserProfile } = useContext(AuthContext);
+  const axiosSecure = useAxios()
 
   const navigate = useNavigate();
 
@@ -22,6 +24,17 @@ const SignUp = () => {
     creatUser(data.email, data.password)
       .then((userCredential) => {
         updateUserProfile(data.name, data.photoUrl);
+
+        const userInfo ={
+          name: data.name,
+          email: data.email
+        }
+
+        axiosSecure.post("/users", userInfo)
+        .then(res=> {
+          console.log(res.data)
+        })
+        
 
         logOut();
 

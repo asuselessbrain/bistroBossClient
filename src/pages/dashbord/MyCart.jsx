@@ -27,8 +27,8 @@ const MyCart = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosSecure.delete(`/carts/${id}`).then((res) => {
-          if (res.data.deletedCount >0) {
-            refetch()
+          if (res.data.deletedCount > 0) {
+            refetch();
             Swal.fire({
               title: "Deleted!",
               text: "Your file has been deleted.",
@@ -91,7 +91,7 @@ const MyCart = () => {
                   <td>${item.price}</td>
                   <th>
                     <button
-                      onClick={() => handleDelete(_id)}
+                      onClick={() => handleDelete(item._id)}
                       className="btn btn-ghost bg-[#B91C1C] hover:bg-red-500"
                     >
                       <svg
